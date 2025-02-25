@@ -74,8 +74,15 @@ async function handleUserLogin(req, res) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const user = await getUserByUsername(username);
-    console.log("🔹 Found User:", user);
+    // let user = await getUserByUsername(username);
+    let user;
+
+    // Check if input is an email
+    if (username.includes("@")) {
+      user = await getUserByEmail(username.toLowerCase());
+    } else {
+      user = await getUserByUsername(username);
+    }
 
     if (!user) {
       return res.status(401).json({ message: "User not found" });
