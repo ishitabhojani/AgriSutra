@@ -32,15 +32,17 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { HeroUIProvider } from "@heroui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AgriSutra",
-  icons:{
+  icons: {
     icon: "/favicon.png",
   },
-  description: "Farmers buy at retail, sell at wholesale, and bear all costs—highlighting their economic challenges.",
+  description:
+    "Farmers buy at retail, sell at wholesale, and bear all costs—highlighting their economic challenges.",
 };
 
 export default function RootLayout({
@@ -49,8 +51,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        <HeroUIProvider>{children}</HeroUIProvider>
+      </body>
     </html>
   );
 }

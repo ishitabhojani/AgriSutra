@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-
 export default function WeatherApp() {
   const router = useRouter();
   const [weatherData, setWeatherData] = useState<any>(null);
