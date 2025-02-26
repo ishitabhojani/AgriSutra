@@ -1,124 +1,3 @@
-// // app/schemes/[id]/SchemeDetailClient.tsx (Client Component)
-// "use client";
-
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { Button } from "@/components/ui/button";
-// import { ArrowLeft } from "lucide-react";
-
-// interface Scheme {
-//   id: string;
-//   name: string;
-//   details?: string;
-//   benefits?: string[];
-//   eligibility?: string;
-//   youtube_link?: string;
-//   registration_link?: string;
-//   // Add other fields if needed
-// }
-
-// export default function SchemeDetailClient({ scheme }: { scheme: Scheme }) {
-//   const router = useRouter();
-//   const [activeTab, setActiveTab] = useState<"details" | "benefits" | "eligibility" | "links">(
-//     "details"
-//   );
-
-//   const handleSaveScheme = async () => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       if (!token) {
-//         alert("You must be logged in to save a scheme.");
-//         return;
-//       }
-//       const res = await fetch(`http://localhost:5000/api/schemes/${scheme.id}/save`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-//       if (!res.ok) throw new Error("Failed to save scheme");
-//       alert("Scheme saved successfully!");
-//     } catch (error) {
-//       console.error(error);
-//       alert("Failed to save scheme.");
-//     }
-//   };
-
-//   return (
-//     <>
-//       {/* Header with Back Arrow and Save Button */}
-//       <div className="flex justify-between items-center mb-4">
-//         <button onClick={() => router.back()} className="flex items-center">
-//           <ArrowLeft className="h-5 w-5 mr-2" />
-//           <span>Scheme Details</span>
-//         </button>
-//         <Button onClick={handleSaveScheme}>Save Scheme</Button>
-//       </div>
-
-//       <h1 className="text-2xl font-bold mb-4">{scheme.name}</h1>
-
-//       {/* Tabs */}
-//       <div className="flex space-x-4 border-b mb-4">
-//         {(["details", "benefits", "eligibility", "links"] as const).map((tab) => (
-//           <button
-//             key={tab}
-//             onClick={() => setActiveTab(tab)}
-//             className={`py-2 px-4 ${
-//               activeTab === tab ? "border-b-2 border-blue-500 font-semibold" : "text-gray-500"
-//             }`}
-//           >
-//             {tab.charAt(0).toUpperCase() + tab.slice(1)}
-//           </button>
-//         ))}
-//       </div>
-
-//       {/* Tab Content */}
-//       <div className="p-4">
-//         {activeTab === "details" && <p>{scheme.details}</p>}
-
-//         {activeTab === "benefits" && scheme.benefits && (
-//           <ul>
-//             {scheme.benefits.map((benefit, index) => (
-//               <li key={index}>• {benefit}</li>
-//             ))}
-//           </ul>
-//         )}
-
-//         {activeTab === "eligibility" && <p>{scheme.eligibility}</p>}
-
-//         {activeTab === "links" && (
-//           <div>
-//             {scheme.youtube_link && (
-//               <>
-//                 <a
-//                   href={scheme.youtube_link}
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   className="text-blue-500 underline"
-//                 >
-//                   YouTube Guidance
-//                 </a>
-//                 <br />
-//               </>
-//             )}
-//             {scheme.registration_link && (
-//               <a
-//                 href={scheme.registration_link}
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-blue-500 underline"
-//               >
-//                 Register Here
-//               </a>
-//             )}
-//           </div>
-//         )}
-//       </div>
-//     </>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
@@ -131,7 +10,7 @@ interface Scheme {
   name: string;
   details?: string;
   benefits?: string[];
-  eligibility?: string;
+  eligibility?: string[];
   youtube_link?: string;
   registration_link?: string;
 }
@@ -214,7 +93,13 @@ export default function SchemeDetailClient({ scheme }: { scheme: Scheme }) {
           </ul>
         )}
 
-        {activeTab === "eligibility" && <p className="text-gray-700">{scheme.eligibility}</p>}
+        {activeTab === "eligibility" && scheme.eligibility && (
+            <ul className="list-disc pl-5 text-gray-700">
+              {scheme.eligibility.map((item, index) => (
+                <li key={index} className="mb-2">{item}</li>
+              ))}
+            </ul>
+        )}
 
         {activeTab === "links" && (
           <div className="space-y-4">
@@ -223,7 +108,7 @@ export default function SchemeDetailClient({ scheme }: { scheme: Scheme }) {
                 href={scheme.youtube_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-600 hover:text-green-800 underline"
+                className="block text-green-600 hover:text-green-800 underline"
               >
                 YouTube Guidance
               </a>
@@ -233,9 +118,9 @@ export default function SchemeDetailClient({ scheme }: { scheme: Scheme }) {
                 href={scheme.registration_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-green-600 hover:text-green-800 underline"
+                className="block text-green-600 hover:text-green-800 underline"
               >
-                Register Here
+                Click here to know more or register
               </a>
             )}
           </div>

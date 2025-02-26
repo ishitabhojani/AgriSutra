@@ -6,6 +6,9 @@ const {
 } = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+const pool = require("../db");
+const { resetPasswordMailTemplate } = require("../templates/resetPassword");
 
 async function handleUserRegister(req, res) {
   const { name, username, email, password } = req.body;
@@ -108,8 +111,66 @@ async function handleUserLogin(req, res) {
   }
 }
 
+async function handleForgotPassword(req,res){
+  const { email } = req.body;
+  console.log("body",req.body);
+  try {
+    const userResult = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+
+    // Always return success even if the email doesn't exist (to prevent email enumeration)
+    if (userResult.rows.length === 0) {
+      return res.status(200).json({ message: "If your email exists, a reset link has been sent." });
+    }
+
+    const user = userResult.rows[0];
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER, // Your Gmail
+        pass: process.env.EMAIL_PASS, // Your App Password
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: "Reset Your Password",
+      html: resetPasswordMailTemplate(resetLink),
+    });
+
+    res.json({ message: "Reset link has been sent to your email." });
+  } catch (err) {
+    console.log("Error sending reset email:", err);
+    res.status(500).json({ error: "Error sending reset email" });
+  }
+}
+
+async function handleResetPassword(req,res) {
+  const { token, password } = req.body;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await pool.query("UPDATE users SET password = $1 WHERE id = $2", [hashedPassword, decoded.userId]);
+
+    res.json({ message: "Password reset successful" });
+  } catch (err) {
+    res.status(400).json({ error: "Invalid or expired token" });
+  }
+}
+
 module.exports = {
   handleUserRegister,
   handleUserProfile,
   handleUserLogin,
+  handleForgotPassword,
+  handleResetPassword
 };

@@ -1,19 +1,16 @@
 const express = require("express");
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-//const pool = require("../db");
 
-const { handleUserRegister, handleUserProfile, handleUserLogin } = require("../controllers/authController");
+const { handleUserRegister, handleUserProfile, handleUserLogin, handleForgotPassword, handleResetPassword } = require("../controllers/authController");
 
 require("dotenv").config();
 
 const router = express.Router();
 
-// ✅ User Registration Route
 router.post("/register", handleUserRegister);
 router.get("/userProfile", handleUserProfile);
-// ✅ User Login Route
 router.post("/login", handleUserLogin);
+router.post("/forgot-password",handleForgotPassword);
+router.post("/reset-password",handleResetPassword);
 
 module.exports = router;
 
