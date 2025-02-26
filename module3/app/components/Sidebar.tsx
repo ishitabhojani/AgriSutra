@@ -121,7 +121,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <span className="text-md font-medium">Settings</span>
           </Link>
           <Link
-            href="/support"
+            href="/profile/support"
             className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-green-50 rounded-md transition"
           >
             <HelpCircle className="h-5 w-5 text-gray-600" />
