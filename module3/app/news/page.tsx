@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchNews } from '@/lib/news';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 interface Article {
   title: string;
@@ -34,26 +35,12 @@ export default function NewsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Clickable arrow + text */}
-      <div
-        className="flex items-center mb-6 text-blue-600 cursor-pointer"
-        onClick={() => router.back()}
-      >
-        <svg
-          className="w-6 h-6 mr-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-        <span className="text-xl font-semibold">Latest News</span>
+      {/* Clickable back arrow with new style */}
+      <div className="flex items-center mb-6">
+        <button onClick={() => router.back()} className="p-2">
+          <ArrowLeft size={28} className="text-blue-900" />
+        </button>
+        <h1 className="text-2xl font-semibold ml-3">Latest News</h1>
       </div>
 
       {loading ? (

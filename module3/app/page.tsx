@@ -1,35 +1,3 @@
-// "use client";
-
-// import { useEffect } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { isAuthenticated } from '@/lib/auth';
-// import { Loader2 } from 'lucide-react';
-
-// export default function Home() {
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     const checkAuth = () => {
-//       if (!isAuthenticated()) {
-//         router.push('/login');
-//       } else {
-//         router.push('/dashboard');
-//       }
-//     };
-    
-//     checkAuth();
-//   }, [router]);
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-background">
-//       <div className="text-center">
-//         <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-//         <p className="text-muted-foreground">Loading AgriSutra...</p>
-//       </div>
-//     </div>
-//   );
-// }
-
 'use client';
 
 import { useEffect } from 'react';
@@ -68,6 +36,7 @@ export default function Home() {
           </div>
         </section>
 
+
         {/* Government Schemes */}
         <section className="bg-white rounded-xl p-6 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Government Schemes</h2>
@@ -83,23 +52,13 @@ export default function Home() {
           </button>
         </section>
 
+
         {/* Market Trends */}
         <section className="bg-white rounded-xl p-6 shadow-sm">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Market Trends</h2>
-          <div className="grid grid-cols-3 gap-4 mb-4">
-            <div className="p-4 bg-green-50 rounded-lg">
-              <h3 className="font-semibold">Wheat</h3>
-              <p className="text-green-600">₹2,100/quintal</p>
-            </div>
-            <div className="p-4 bg-green-50 rounded-lg">
-              <h3 className="font-semibold">Rice</h3>
-              <p className="text-green-600">₹1,900/quintal</p>
-            </div>
-            <div className="p-4 bg-green-50 rounded-lg">
-              <h3 className="font-semibold">Maize</h3>
-              <p className="text-green-600">₹1,800/quintal</p>
-            </div>
-          </div>
+          <p className="text-gray-600 mb-4">
+          Stay updated with the real time market prices and agricultural commodity trends.
+          </p>
           <button
             onClick={() => router.push('/market')}
             className="flex items-center text-green-600 hover:text-green-700"
@@ -108,6 +67,7 @@ export default function Home() {
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
         </section>
+
 
         {/* Equipment Services */}
         <section className="bg-white rounded-xl p-6 shadow-sm">
@@ -132,6 +92,7 @@ export default function Home() {
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
         </section>
+
 
         {/* Soil Analysis */}
         <section className="bg-white rounded-xl p-6 shadow-sm text-center">
