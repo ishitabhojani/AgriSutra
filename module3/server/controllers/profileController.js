@@ -1,9 +1,9 @@
-import pool from "../db.js";
+const pool = require("../db");
 
-// Get user profile by userId
-export const getUserProfile = async (req, res) => {
+async function getUserProfile(req, res) {
   try {
     const userId = req.query.userId;
+
     if (!userId) {
       return res.status(400).json({ error: "Missing userId" });
     }
@@ -23,10 +23,9 @@ export const getUserProfile = async (req, res) => {
     console.error("Error fetching profile:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};
+}
 
-// Update user profile
-export const updateUserProfile = async (req, res) => {
+async function updateUserProfile(req, res) {
   try {
     const {
       id,
@@ -82,4 +81,9 @@ export const updateUserProfile = async (req, res) => {
     console.error("Error updating profile:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+}
+
+module.exports = {
+  getUserProfile,
+  updateUserProfile,
 };
