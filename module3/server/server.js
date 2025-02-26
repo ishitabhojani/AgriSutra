@@ -7,6 +7,7 @@ const schemeRoutes = require("./routes/schemes");
 const equipmentRoutes = require("./routes/equipment");
 const marketTrendsRoute = require('./routes/marketTrends');
 const newsRoutes = require('./routes/news');
+const profileRoute = require('./routes/profile');
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use("/api/schemes", schemeRoutes);
 app.use("/api/equipment", equipmentRoutes);
 app.use('/api/market-trends', marketTrendsRoute);
 app.use('/api/news', newsRoutes);
+app.use('/api/profile', profileRoute);
 
 // ✅ PostgreSQL Database Connection
 const { Pool } = require("pg");
