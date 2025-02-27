@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-// ✅ Use Auth Routes
+// Use Auth Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/schemes", schemeRoutes);
 app.use("/api/equipment", equipmentRoutes);
@@ -24,7 +24,7 @@ app.use('/api/market-trends', marketTrendsRoute);
 app.use('/api/news', newsRoutes);
 app.use('/api/profile', profileRoute);
 
-// ✅ PostgreSQL Database Connection
+// PostgreSQL Database Connection
 const { Pool } = require("pg");
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -33,7 +33,7 @@ const pool = new Pool({
         false,
 });
 
-// ✅ Start the Server
+// Start the Server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

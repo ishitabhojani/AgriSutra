@@ -56,7 +56,7 @@ async function handleUserProfile(req, res) {
     if (!token) return res.status(401).json({ message: "Unauthorized" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await getUserById(decoded.id); // ✅ Fetch by ID instead of username
+    const user = await getUserById(decoded.id); // Fetch by ID instead of username
 
     if (!user) return res.status(404).json({ message: "User not found" });
 

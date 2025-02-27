@@ -22,10 +22,10 @@ const getUserByUsername = async(username) => {
     return result.rows[0];
 };
 
-// ✅ New function to fetch user by ID
+// New function to fetch user by ID
 const getUserById = async(id) => {
     const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
     return result.rows[0];
 };
 
-module.exports = { createUser, getUserByEmail, getUserByUsername, getUserById }; // ✅ Export `getUserById`
+module.exports = { createUser, getUserByEmail, getUserByUsername, getUserById }; // Export `getUserById`
