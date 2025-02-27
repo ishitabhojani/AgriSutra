@@ -119,7 +119,7 @@ async function handleForgotPassword(req,res){
 
     // Always return success even if the email doesn't exist (to prevent email enumeration)
     if (userResult.rows.length === 0) {
-      return res.status(200).json({ message: "If your email exists, a reset link has been sent." });
+      return res.status(404).json({ message: "Email address is invalid." });
     }
 
     const user = userResult.rows[0];

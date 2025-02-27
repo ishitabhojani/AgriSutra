@@ -42,8 +42,33 @@ async function handleSaveScheme(req, res) {
   }
 }
 
+
+// GET trending schemes
+async function handleGetTrendingSchemes(req, res) {
+  try {
+    const result = await pool.query("SELECT * FROM schemes WHERE trending = true ORDER BY id");
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
+// GET all schemes (Explore More)
+async function handleGetAllSchemes(req, res) {
+  try {
+    const result = await pool.query("SELECT * FROM schemes ORDER BY id");
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
 module.exports = {
   handelGetSchemes,
   handelGetSchemeById,
-  handleSaveScheme
+  handleSaveScheme,
+  handleGetTrendingSchemes,
+  handleGetAllSchemes
 };
