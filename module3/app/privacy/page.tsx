@@ -1,152 +1,129 @@
 "use client";
 
 import React from "react";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+// Import the translation hook
+import { useTranslation } from "react-i18next";
 
 export default function PrivacyPolicyPage() {
+  const router = useRouter();
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header */}
-      <div className="bg-white p-6 shadow-sm mb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Privacy Policy</h1>
+      <div className="bg-white p-4 shadow-sm flex items-center justify-between">
+        <div className="flex items-center">
+          <button
+            onClick={() => router.back()}
+            className="text-black hover:text-gray-900 focus:outline-none mr-2"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </button>
+          <h1 className="text-xl font-bold text-black">
+            {t("privacyPage.title")}
+          </h1>
+        </div>
       </div>
 
       <div className="max-w-9xl mx-auto bg-white p-6 rounded-lg shadow-sm space-y-6">
         {/* Introduction */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            1. Introduction
+            {t("privacyPage.introductionHeading")}
           </h2>
-          <p className="text-gray-600">
-            This Privacy Policy explains how AgriSutra collects, uses, and
-            shares information about you when you use our Services. By using our
-            Services, you agree to the collection and use of information in
-            accordance with this policy.
-          </p>
+          <p className="text-gray-600">{t("privacyPage.introductionContent")}</p>
         </section>
 
         {/* Information We Collect */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            2. Information We Collect
+            {t("privacyPage.informationWeCollectHeading")}
           </h2>
           <p className="text-gray-600">
-            We may collect personal information that you provide to us, such as
-            your name, email address, phone number, and location data. We also
-            automatically collect certain technical information when you use our
-            Services, including your IP address, browser type, and device
-            identifiers.
+            {t("privacyPage.informationWeCollectContent")}
           </p>
         </section>
 
         {/* How We Use Your Information */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            3. How We Use Your Information
+            {t("privacyPage.howWeUseYourInformationHeading")}
           </h2>
-          <p className="text-gray-600">We use the information we collect to:</p>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>Provide, maintain, and improve our Services</li>
-            <li>
-              Respond to your comments, questions, and customer service requests
-            </li>
-            <li>Send you technical notices, updates, and security alerts</li>
-            <li>
-              Analyze trends and usage to develop new features and services
-            </li>
-          </ul>
+          <p className="text-gray-600">
+            {t("privacyPage.howWeUseYourInformationContentIntro")}
+          </p>
+          {/* Directly output the one-line string from the JSON */}
+          <p className="text-gray-600">
+            {t("privacyPage.howWeUseYourInformationList")}
+          </p>
         </section>
 
         {/* Sharing Your Information */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            4. Sharing Your Information
+            {t("privacyPage.sharingYourInformationHeading")}
           </h2>
           <p className="text-gray-600">
-            We do not sell your personal information. We may share your
-            information with trusted third-party service providers who help us
-            operate our Services. We may also share information if required by
-            law or to protect our rights and property.
+            {t("privacyPage.sharingYourInformationContent")}
           </p>
         </section>
 
         {/* Cookies */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            5. Cookies
+            {t("privacyPage.cookiesHeading")}
           </h2>
-          <p className="text-gray-600">
-            We use cookies and similar tracking technologies to collect
-            information about your usage of our Services and to improve your
-            experience. You can set your browser to refuse cookies or to alert
-            you when cookies are being sent.
-          </p>
+          <p className="text-gray-600">{t("privacyPage.cookiesContent")}</p>
         </section>
 
         {/* Data Retention */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            6. Data Retention
+            {t("privacyPage.dataRetentionHeading")}
           </h2>
           <p className="text-gray-600">
-            We will retain your information for as long as necessary to fulfill
-            the purposes outlined in this Privacy Policy, unless a longer
-            retention period is required or permitted by law.
+            {t("privacyPage.dataRetentionContent")}
           </p>
         </section>
 
         {/* Security */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            7. Security
+            {t("privacyPage.securityHeading")}
           </h2>
-          <p className="text-gray-600">
-            We take reasonable measures to protect your personal information
-            from unauthorized access or disclosure. However, no security system
-            is impenetrable, and we cannot guarantee the absolute security of
-            your data.
-          </p>
+          <p className="text-gray-600">{t("privacyPage.securityContent")}</p>
         </section>
 
         {/* Children's Privacy */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            8. Children’s Privacy
+            {t("privacyPage.childrenHeading")}
           </h2>
-          <p className="text-gray-600">
-            Our Services are not intended for individuals under the age of 18.
-            We do not knowingly collect personal information from children under
-            18. If we discover that a child under 18 has provided us with
-            personal information, we will delete such information from our
-            systems.
-          </p>
+          <p className="text-gray-600">{t("privacyPage.childrenContent")}</p>
         </section>
 
         {/* Changes to This Policy */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            9. Changes to This Policy
+            {t("privacyPage.changesHeading")}
           </h2>
-          <p className="text-gray-600">
-            We may update this Privacy Policy from time to time. We will notify
-            you of any significant changes by posting the new policy on our
-            website or by sending an email to the address associated with your
-            account.
-          </p>
+          <p className="text-gray-600">{t("privacyPage.changesContent")}</p>
         </section>
 
         {/* Contact Us */}
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
-            10. Contact Us
+            {t("privacyPage.contactUsHeading")}
           </h2>
           <p className="text-gray-600">
-            If you have any questions or concerns about this Privacy Policy,
-            please contact us at
+            {t("privacyPage.contactUsContent")}{" "}
             <a
-              href="mailto:agrisutra@gmail.com"
-              className="text-blue-600 hover:underline ml-1"
+              href={`mailto:${t("privacyPage.contactEmail")}`}
+              className="text-blue-600 hover:underline"
             >
-              agrisutra@gmail.com
+              {t("privacyPage.contactEmail")}
             </a>
             .
           </p>

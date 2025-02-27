@@ -3,6 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getProfile, updateProfile, ProfileData } from "@/lib/profile";
+import { ArrowLeft } from "lucide-react";
+
+// 1. Import the translation hook
+import { useTranslation } from "react-i18next";
 
 export default function EditProfilePage() {
   const router = useRouter();
@@ -10,6 +14,9 @@ export default function EditProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+
+  // 2. Initialize translation
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchData() {
@@ -25,8 +32,14 @@ export default function EditProfilePage() {
     fetchData();
   }, []);
 
-  if (loading) return <div className="p-4">Loading...</div>;
-  if (!profile) return <div className="p-4">Error loading profile.</div>;
+  if (loading) {
+    // 3. Replace "Loading..." with translation
+    return <div className="p-4">{t("editProfilePage.loading")}</div>;
+  }
+  if (!profile) {
+    // 4. Replace "Error loading profile." with translation
+    return <div className="p-4">{t("editProfilePage.errorLoadingProfile")}</div>;
+  }
 
   const handleSave = async () => {
     setSaving(true);
@@ -36,7 +49,8 @@ export default function EditProfilePage() {
       setProfile(updated);
       router.push("/profile");
     } catch (err: any) {
-      setError(err.message || "Failed to update profile");
+      // 5. Replace fallback text with translation key
+      setError(err.message || t("editProfilePage.failedToUpdateProfile"));
     } finally {
       setSaving(false);
     }
@@ -46,21 +60,36 @@ export default function EditProfilePage() {
     <div className="min-h-screen bg-gray-100">
       {/* Header with Save button */}
       <div className="bg-white p-4 shadow-sm flex items-center justify-between">
-        <h1 className="text-lg font-bold">Edit Profile</h1>
+        <div className="flex items-center">
+          <button
+            onClick={() => router.back()}
+            className="text-black hover:text-gray-900 focus:outline-none mr-2"
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </button>
+          {/* 6. Replace "Edit Profile" with translation */}
+          <h1 className="text-xl font-bold text-black">
+            {t("editProfilePage.editProfile")}
+          </h1>
+        </div>
         <button
           onClick={handleSave}
           className="text-blue-600 hover:text-blue-800 font-semibold"
           disabled={saving}
         >
-          {saving ? "Saving..." : "Save"}
+          {/* 7. Replace "Saving..." and "Save" with translation */}
+          {saving ? t("editProfilePage.saving") : t("editProfilePage.save")}
         </button>
       </div>
 
       {/* Form */}
       <div className="p-4">
         <div className="bg-white rounded-lg shadow-sm p-4 space-y-4">
+          {/* Name */}
           <div>
-            <label className="block font-semibold mb-1">Name *</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.nameLabel")}
+            </label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -70,8 +99,12 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* Username */}
           <div>
-            <label className="block font-semibold mb-1">Username *</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.usernameLabel")}
+            </label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -84,8 +117,12 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* Email */}
           <div>
-            <label className="block font-semibold mb-1">Email *</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.emailLabel")}
+            </label>
             <input
               type="email"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -95,8 +132,12 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* Gender */}
           <div>
-            <label className="block font-semibold mb-1">Gender</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.genderLabel")}
+            </label>
             <select
               className="w-full border border-gray-300 rounded-lg p-2"
               value={profile.gender || ""}
@@ -107,14 +148,18 @@ export default function EditProfilePage() {
                 } as ProfileData)
               }
             >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
+              <option value="">{t("editProfilePage.selectGender")}</option>
+              <option value="Male">{t("editProfilePage.male")}</option>
+              <option value="Female">{t("editProfilePage.female")}</option>
+              <option value="Other">{t("editProfilePage.other")}</option>
             </select>
           </div>
+
+          {/* Date of Birth */}
           <div>
-            <label className="block font-semibold mb-1">Date of Birth</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.dateOfBirth")}
+            </label>
             <input
               type="date"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -129,19 +174,30 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* State */}
           <div>
-            <label className="block font-semibold mb-1">State</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.state")}
+            </label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-lg p-2"
               value={profile.state}
               onChange={(e) =>
-                setProfile({ ...profile, state: e.target.value } as ProfileData)
+                setProfile({
+                  ...profile,
+                  state: e.target.value,
+                } as ProfileData)
               }
             />
           </div>
+
+          {/* District */}
           <div>
-            <label className="block font-semibold mb-1">District</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.district")}
+            </label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -154,8 +210,12 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* Phone Number */}
           <div>
-            <label className="block font-semibold mb-1">Phone Number *</label>
+            <label className="block font-semibold mb-1">
+              {t("editProfilePage.phoneNumberLabel")}
+            </label>
             <input
               type="text"
               className="w-full border border-gray-300 rounded-lg p-2"
@@ -168,6 +228,8 @@ export default function EditProfilePage() {
               }
             />
           </div>
+
+          {/* Error Message */}
           {error && <p className="text-red-500">{error}</p>}
         </div>
       </div>
