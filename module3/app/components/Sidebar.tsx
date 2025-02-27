@@ -21,13 +21,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    // ✅ Load user from localStorage for instant display
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
 
-    // ✅ Fetch latest user data from API
+    //Fetch latest user data from API
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -43,10 +42,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         if (response.ok) {
           const data = await response.json();
           setUser(data);
-          localStorage.setItem("user", JSON.stringify(data)); // ✅ Keep it updated
+          localStorage.setItem("user", JSON.stringify(data)); //Keep it updated
         }
       } catch (error) {
-        console.error("❌ Error fetching user profile:", error);
+        console.error("Error fetching user profile:", error);
       }
     };
 
@@ -57,7 +56,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user"); // ✅ Clear user details on logout
+    localStorage.removeItem("user"); // Clear user details on logout
     router.push("/login");
   };
 
@@ -68,7 +67,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       }`}
     >
       <div className="p-4">
-        {/* 🔹 Sidebar Header */}
+        {/* Sidebar Header */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center">
             <Sprout className="h-8 w-8 text-green-600" />
@@ -84,7 +83,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </button>
         </div>
 
-        {/* 🔹 User Profile Section */}
+        {/* User Profile Section */}
         {user ? (
           <div className="mb-6">
             <div className="flex items-center space-x-4">
@@ -105,7 +104,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <p className="text-gray-500">Loading...</p>
         )}
 
-        {/* 🔹 Navigation Links */}
+        {/* Navigation Links */}
         <nav className="space-y-2">
           <Link
             href="/schemes"
@@ -128,7 +127,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             <span className="text-md font-medium">Support</span>
           </Link>
 
-          {/* 🔹 Logout Button */}
+          {/*Logout Button */}
           <button
             onClick={handleLogout}
             className="flex items-center space-x-2 px-4 py-3 text-red-600 hover:bg-red-50 rounded-md w-full text-left transition"

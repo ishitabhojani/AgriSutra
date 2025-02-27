@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-lg text-center">
             <p className="text-lg font-semibold">Allow Location Access?</p>
-            <p className="text-sm text-gray-600">We need your location to show accurate weather updates.</p>
+            <p className="text-sm text-gray-600">We need your location to show accurate weather updates</p>
             <div className="mt-4 flex justify-around">
               <button
                 onClick={() => {

@@ -1,104 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import { useRouter } from "next/navigation";
-// import Link from "next/link";
-// import { Loader2 } from "lucide-react";
-
-// export default function Login() {
-//   const router = useRouter();
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
-
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError("");
-
-//     const formData = new FormData(e.currentTarget);
-//     const username = formData.get("username")?.toString().trim();
-//     const password = formData.get("password")?.toString();
-
-//     if (!username || !password) {
-//       setError("All fields are required.");
-//       setLoading(false);
-//       return;
-//     }
-
-//     try {
-//       const response = await fetch("http://localhost:3001/api/auth/login", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ username, password }),
-//       });
-
-//       const data = await response.json();
-//       console.log("🔹 API Response:", data);
-
-//       if (!response.ok) {
-//         throw new Error(data.message || "Invalid credentials");
-//       }
-
-//       localStorage.setItem("token", data.token);
-//       router.push("/");
-//     } catch (err) {
-//       setError((err as any).message || "Login failed. Please check your credentials.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-white flex items-center justify-center">
-//       <div className="bg-[#F0FFF1] p-8 rounded-xl shadow-lg w-full max-w-md">
-//         <h2 className="text-3xl font-bold text-center text-green-800 mb-8">
-//           Welcome Back
-//         </h2>
-//         <form onSubmit={handleSubmit} className="space-y-6">
-//           <input
-//             type="text"
-//             name="username"
-//             id="username"
-//             placeholder="Username or Email"
-//             required
-//             className="w-full border rounded-large px-4 py-3 text-lg shadow-sm focus:ring-4 focus:ring-green-400"
-//           />
-//           <input
-//             type="password"
-//             name="password"
-//             id="password"
-//             placeholder="Password"
-//             required
-//             className="w-full border rounded-large px-4 py-3 text-lg shadow-sm focus:ring-4 focus:ring-green-400"
-//           />
-//           {error && <p className="text-red-600 text-sm text-center">{error}</p>}
-//           <button
-//             type="submit"
-//             disabled={loading}
-//             className="w-full flex justify-center py-2 px-4 text-white bg-green-600 rounded-large shadow-md hover:bg-green-700 transition"
-//           >
-//             {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : "Sign in"}
-//           </button>
-//         </form>
-
-//         {/* Forgot Password Link */}
-//         <p className="mt-4 text-center text-sm text-gray-600">
-//           <Link href="/forgot-password" className="text-green-600 hover:text-green-500">
-//             Forgot Password?
-//           </Link>
-//         </p>
-
-//         <p className="mt-6 text-center text-sm text-gray-600">
-//           Don't have an account?{" "}
-//           <Link href="/signup" className="text-green-600 hover:text-green-500">
-//             Sign up
-//           </Link>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
@@ -136,7 +35,7 @@ export default function Login() {
       });
 
       const data = await response.json();
-      console.log("🔹 API Response:", data);
+      console.log("API Response:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Invalid credentials");
@@ -145,7 +44,7 @@ export default function Login() {
       localStorage.setItem("token", data.token);
       router.push("/");
     } catch (err) {
-      setError((err as any).message || "Login failed. Please check your credentials.");
+      setError((err as any).message || "Login failed. Please check your credentials");
     } finally {
       setLoading(false);
     }
