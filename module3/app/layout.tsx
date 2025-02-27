@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "AgriSutra",
   icons: {
-    icon: "/favicon.png",
+    icon: "/logo2.jpg",
   },
   description:
     "Farmers buy at retail, sell at wholesale, and bear all costs—highlighting their economic challenges.",

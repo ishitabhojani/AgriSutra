@@ -8,6 +8,7 @@ const equipmentRoutes = require("./routes/equipment");
 const marketTrendsRoute = require('./routes/marketTrends');
 const newsRoutes = require('./routes/news');
 const profileRoute = require('./routes/profile');
+const seedRoutes = require('./routes/seeds');
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/api/equipment", equipmentRoutes);
 app.use('/api/market-trends', marketTrendsRoute);
 app.use('/api/news', newsRoutes);
 app.use('/api/profile', profileRoute);
+app.use('/',seedRoutes);
 
 // PostgreSQL Database Connection
 const { Pool } = require("pg");
@@ -34,7 +36,7 @@ const pool = new Pool({
 });
 
 // Start the Server
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
